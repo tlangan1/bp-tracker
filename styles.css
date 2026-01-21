@@ -1,0 +1,353 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 80vh;
+  max-width: 1400px;
+  max-height: 1400px;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Cdefs%3E%3ClinearGradient id="heartGrad1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b9d;stop-opacity:1" /%3E%3Cstop offset="50%25" style="stop-color:%23ff4081;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23c2185b;stop-opacity:1" /%3E%3C/linearGradient%3E%3CradialGradient id="heartGrad2"%3E%3Cstop offset="0%25" style="stop-color:%23ffffff;stop-opacity:0.5" /%3E%3Cstop offset="100%25" style="stop-color:%23ffffff;stop-opacity:0" /%3E%3C/radialGradient%3E%3Cfilter id="shadow"%3E%3CfeGaussianBlur in="SourceAlpha" stdDeviation="3"/%3E%3CfeOffset dx="2" dy="4" result="offsetblur"/%3E%3CfeComponentTransfer%3E%3CfeFuncA type="linear" slope="0.5"/%3E%3C/feComponentTransfer%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode in="SourceGraphic"/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cpath d="M100,170 C80,150 20,110 20,70 C20,45 40,30 60,30 C75,30 85,38 100,55 C115,38 125,30 140,30 C160,30 180,45 180,70 C180,110 120,150 100,170 Z" fill="url(%23heartGrad1)" filter="url(%23shadow)"/%3E%3Cellipse cx="70" cy="55" rx="25" ry="20" fill="url(%23heartGrad2)" opacity="0.6"/%3E%3Cpath d="M100,170 C80,150 20,110 20,70 C20,45 40,30 60,30 C75,30 85,38 100,55" fill="%23ff85a8" opacity="0.3"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 20px;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1em;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-small {
+  padding: 5px 15px;
+  font-size: 0.9em;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+}
+
+.entry-form {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.entry-form h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 150px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.legend {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.legend h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.legend-items {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.legend-section h4 {
+  color: #555;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.color-box {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Color definitions matching the VBA code */
+.green {
+  background-color: rgb(116, 208, 80);
+}
+
+.yellow {
+  background-color: rgb(255, 255, 0);
+}
+
+.orange {
+  background-color: rgb(255, 192, 0);
+}
+
+.red {
+  background-color: rgb(255, 0, 0);
+}
+
+.dark-red {
+  background-color: rgb(192, 0, 0);
+}
+
+.dark-blue {
+  background-color: rgb(0, 112, 192);
+}
+
+.blue {
+  background-color: rgb(0, 176, 240);
+}
+
+.dark-green {
+  background-color: rgb(0, 176, 80);
+}
+
+.white-red-text {
+  background-color: white;
+  color: red !important;
+}
+
+.data-table {
+  margin-bottom: 30px;
+}
+
+.data-table h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.table-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+thead {
+  background: #667eea;
+  color: white;
+}
+
+th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.statistics {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.statistics h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 2em;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .legend-items {
+    flex-direction: column;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

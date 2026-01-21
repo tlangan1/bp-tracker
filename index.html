@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Pressure & Pulse Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Blood Pressure & Pulse Tracker</h1>
+        <p class="subtitle">
+          Track your daily readings with automatic AHA-based color coding
+        </p>
+      </header>
+
+      <div class="controls">
+        <button id="saveBtn" class="btn btn-primary">Save Data</button>
+        <button id="loadBtn" class="btn btn-secondary">Load Data</button>
+        <button id="exportBtn" class="btn btn-secondary">
+          Export to Text File
+        </button>
+        <button id="importBtn" class="btn btn-secondary">
+          Import from Text File
+        </button>
+        <input type="file" id="fileInput" accept=".txt" style="display: none" />
+      </div>
+
+      <div class="entry-form">
+        <h2>Add New Reading</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time:</label>
+            <input type="time" id="time" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="systolic">Systolic:</label>
+            <input type="number" id="systolic" min="50" max="250" required />
+          </div>
+          <div class="form-group">
+            <label for="diastolic">Diastolic:</label>
+            <input type="number" id="diastolic" min="30" max="150" required />
+          </div>
+          <div class="form-group">
+            <label for="pulse">Pulse:</label>
+            <input type="number" id="pulse" min="40" max="150" required />
+          </div>
+        </div>
+        <button id="addBtn" class="btn btn-primary">Add Reading</button>
+      </div>
+
+      <div class="legend">
+        <h3>Color Guide</h3>
+        <div class="legend-items">
+          <div class="legend-section">
+            <h4>Blood Pressure</h4>
+            <div class="legend-item">
+              <span class="color-box green"></span> Normal (&lt;120 and &lt;80)
+            </div>
+            <div class="legend-item">
+              <span class="color-box yellow"></span> Elevated (120-129 and
+              &lt;80)
+            </div>
+            <div class="legend-item">
+              <span class="color-box orange"></span> Stage 1 (130-139 or 80-89)
+            </div>
+            <div class="legend-item">
+              <span class="color-box red"></span> Stage 2 (≥140 or 90-119)
+            </div>
+            <div class="legend-item">
+              <span class="color-box dark-red"></span> Crisis (≥180 and/or ≥120)
+            </div>
+          </div>
+          <div class="legend-section">
+            <h4>Pulse</h4>
+            <div class="legend-item">
+              <span class="color-box dark-blue"></span> Low (57-61)
+            </div>
+            <div class="legend-item">
+              <span class="color-box blue"></span> Below Normal (62-67)
+            </div>
+            <div class="legend-item">
+              <span class="color-box dark-green"></span> Good (68-71)
+            </div>
+            <div class="legend-item">
+              <span class="color-box green"></span> Normal (72-75)
+            </div>
+            <div class="legend-item">
+              <span class="color-box yellow"></span> Elevated (76-81)
+            </div>
+            <div class="legend-item">
+              <span class="color-box red"></span> High (≥82)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-table">
+        <h2>Your Readings</h2>
+        <div class="table-controls">
+          <button id="toggleViewBtn" class="btn btn-small btn-primary">
+            View Aggregated by Time Period
+          </button>
+          <button id="sortDateBtn" class="btn btn-small">Sort by Date</button>
+          <button id="clearAllBtn" class="btn btn-small btn-danger">
+            Clear All Data
+          </button>
+        </div>
+        <div class="table-wrapper">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Systolic</th>
+                <th>Diastolic</th>
+                <th>Pulse</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Data rows will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="data-table" id="aggregatedView" style="display: none">
+        <h2>Aggregated by Time Period</h2>
+        <div class="table-controls">
+          <button id="backToListBtn" class="btn btn-small btn-primary">
+            Back to Individual Readings
+          </button>
+        </div>
+        <div class="table-wrapper">
+          <table id="aggregatedTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time Period</th>
+                <th>Count</th>
+                <th>Systolic (Avg)</th>
+                <th>Diastolic (Avg)</th>
+                <th>Pulse (Avg)</th>
+              </tr>
+            </thead>
+            <tbody id="aggregatedTableBody">
+              <!-- Aggregated data rows will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="statistics">
+        <h2>Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Average Systolic</h3>
+            <p class="stat-value" id="avgSystolic">--</p>
+          </div>
+          <div class="stat-card">
+            <h3>Average Diastolic</h3>
+            <p class="stat-value" id="avgDiastolic">--</p>
+          </div>
+          <div class="stat-card">
+            <h3>Average Pulse</h3>
+            <p class="stat-value" id="avgPulse">--</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Readings</h3>
+            <p class="stat-value" id="totalReadings">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
