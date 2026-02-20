@@ -4,7 +4,7 @@ A browser-based application for tracking blood pressure and pulse readings with 
 
 ## Features
 
-- **Easy Data Entry**: Record systolic, diastolic, and pulse readings for morning, noon, and night
+- **Easy Data Entry**: Record systolic, diastolic, and pulse readings for a given date and time
 - **Automatic Color Coding**: Visual indicators based on AHA guidelines
 
   - Green: Normal range
@@ -19,7 +19,7 @@ A browser-based application for tracking blood pressure and pulse readings with 
   - Export readings to text file
   - Import readings from text file
   - Delete individual readings
-  - Sort by date
+  - Displays default to newest to oldest order
 
 - **Statistics**: View averages and total count of readings
 
@@ -32,7 +32,7 @@ A browser-based application for tracking blood pressure and pulse readings with 
 
 2. **Add a Reading**
 
-   - Select the date, time of day, and reading number
+   - Select the date and time of day
    - Enter systolic, diastolic, and pulse values
    - Click "Add Reading"
    - The reading will appear in the table with color coding

@@ -182,7 +182,7 @@ class BPTracker {
     sortedReadings.forEach((reading) => {
       const bpColor = this.getBloodPressureColor(
         reading.systolic,
-        reading.diastolic
+        reading.diastolic,
       );
       const pulseColor = this.getPulseColor(reading.pulse);
 
@@ -202,7 +202,7 @@ class BPTracker {
 
   showAggregatedView() {
     document.getElementById(
-      "dataTable"
+      "dataTable",
     ).parentElement.parentElement.style.display = "none";
     document.getElementById("aggregatedView").style.display = "block";
     this.renderAggregatedTable();
@@ -210,7 +210,7 @@ class BPTracker {
 
   showListView() {
     document.getElementById(
-      "dataTable"
+      "dataTable",
     ).parentElement.parentElement.style.display = "block";
     document.getElementById("aggregatedView").style.display = "none";
   }
@@ -293,7 +293,7 @@ class BPTracker {
 
       const bpColor = this.getBloodPressureColor(
         systolicRounded,
-        diastolicRounded
+        diastolicRounded,
       );
       const pulseColor = this.getPulseColor(pulseRounded);
 
@@ -384,7 +384,7 @@ class BPTracker {
   async saveToFile() {
     if (!this.isFileSystemAccessSupported()) {
       alert(
-        "File System Access API is not supported in this browser. Please use Chrome, Edge, or a recent version of Safari."
+        "File System Access API is not supported in this browser. Please use Chrome, Edge, or a recent version of Safari.",
       );
       return;
     }
@@ -430,7 +430,7 @@ class BPTracker {
   async loadFromFile() {
     if (!this.isFileSystemAccessSupported()) {
       alert(
-        "File System Access API is not supported in this browser. Please use Chrome, Edge, or a recent version of Safari."
+        "File System Access API is not supported in this browser. Please use Chrome, Edge, or a recent version of Safari.",
       );
       return;
     }
@@ -565,7 +565,7 @@ class BPTracker {
   clearAllData() {
     if (
       confirm(
-        "Are you sure you want to delete ALL readings? This cannot be undone!"
+        "Are you sure you want to delete ALL readings? This cannot be undone!",
       )
     ) {
       if (confirm("Really delete everything? This is your last chance!")) {

@@ -32,17 +32,17 @@ const mimeTypes = {
 function generateCertificate() {
   if (!fs.existsSync(CERTFILE) || !fs.existsSync(KEYFILE)) {
     console.log(
-      "SSL certificate not found. Generating self-signed certificate..."
+      "SSL certificate not found. Generating self-signed certificate...",
     );
     try {
       execSync(
         `openssl req -new -x509 -keyout ${KEYFILE} -out ${CERTFILE} -days 365 -nodes -subj "/CN=localhost"`,
-        { stdio: "inherit" }
+        { stdio: "inherit" },
       );
       console.log(`Certificate generated: ${CERTFILE}`);
     } catch (error) {
       console.error(
-        "Error generating certificate. Make sure openssl is installed."
+        "Error generating certificate. Make sure openssl is installed.",
       );
       process.exit(1);
     }

@@ -22,7 +22,7 @@ body::before {
   height: 80vh;
   max-width: 1400px;
   max-height: 1400px;
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Cdefs%3E%3ClinearGradient id="heartGrad1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b9d;stop-opacity:1" /%3E%3Cstop offset="50%25" style="stop-color:%23ff4081;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23c2185b;stop-opacity:1" /%3E%3C/linearGradient%3E%3CradialGradient id="heartGrad2"%3E%3Cstop offset="0%25" style="stop-color:%23ffffff;stop-opacity:0.5" /%3E%3Cstop offset="100%25" style="stop-color:%23ffffff;stop-opacity:0" /%3E%3C/radialGradient%3E%3Cfilter id="shadow"%3E%3CfeGaussianBlur in="SourceAlpha" stdDeviation="3"/%3E%3CfeOffset dx="2" dy="4" result="offsetblur"/%3E%3CfeComponentTransfer%3E%3CfeFuncA type="linear" slope="0.5"/%3E%3C/feComponentTransfer%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode in="SourceGraphic"/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cpath d="M100,170 C80,150 20,110 20,70 C20,45 40,30 60,30 C75,30 85,38 100,55 C115,38 125,30 140,30 C160,30 180,45 180,70 C180,110 120,150 100,170 Z" fill="url(%23heartGrad1)" filter="url(%23shadow)"/%3E%3Cellipse cx="70" cy="55" rx="25" ry="20" fill="url(%23heartGrad2)" opacity="0.6"/%3E%3Cpath d="M100,170 C80,150 20,110 20,70 C20,45 40,30 60,30 C75,30 85,38 100,55" fill="%23ff85a8" opacity="0.3"/%3E%3C/svg%3E');
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Cdefs%3E%3ClinearGradient id="heartGrad1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23ff6b9d;stop-opacity:1" /%3E%3Cstop offset="50%25" style="stop-color:%23ff4081;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23c2185b;stop-opacity:1" /%3E%3C/linearGradient%3E%3Cfilter id="shadow"%3E%3CfeGaussianBlur in="SourceAlpha" stdDeviation="3"/%3E%3CfeOffset dx="2" dy="4" result="offsetblur"/%3E%3CfeComponentTransfer%3E%3CfeFuncA type="linear" slope="0.5"/%3E%3C/feComponentTransfer%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode in="SourceGraphic"/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cpath d="M100,170 C80,150 20,110 20,70 C20,45 40,30 60,30 C75,30 85,38 100,55 C115,38 125,30 140,30 C160,30 180,45 180,70 C180,110 120,150 100,170 Z" fill="none" stroke="url(%23heartGrad1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(%23shadow)"/%3E%3C/svg%3E');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -350,4 +350,343 @@ tbody tr:hover {
   .stats-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Landscape mode enhancements */
+@media (max-width: 1024px) and (orientation: landscape) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  header {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .subtitle {
+    font-size: 1em;
+  }
+
+  .controls {
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .controls .btn {
+    flex: 1 1 auto;
+  }
+
+  .entry-form .form-row {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .entry-form {
+    margin-bottom: 20px;
+  }
+
+  .legend-items {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .legend {
+    margin-bottom: 20px;
+  }
+
+  .legend-section {
+    flex: 1;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .table-controls {
+    flex-wrap: wrap;
+  }
+
+  .data-table {
+    margin-bottom: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 15px;
+  }
+
+  .statistics {
+    padding: 15px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  body {
+    padding: 8px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .controls {
+    gap: 6px;
+  }
+
+  .entry-form {
+    margin-bottom: 16px;
+  }
+
+  .legend {
+    margin-bottom: 16px;
+  }
+
+  .data-table {
+    margin-bottom: 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Documentation Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid #667eea;
+}
+
+.modal-header h2 {
+  color: #333;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.modal-body h1 {
+  color: #333;
+  font-size: 1.8em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.modal-body h2 {
+  color: #555;
+  font-size: 1.4em;
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-body h3 {
+  color: #666;
+  font-size: 1.15em;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.modal-body h4 {
+  color: #777;
+  font-size: 1.05em;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.modal-body ul,
+.modal-body ol {
+  margin: 10px 0 10px 20px;
+}
+
+.modal-body li {
+  margin: 5px 0;
+}
+
+.modal-body p {
+  margin: 10px 0;
+  color: #444;
+}
+
+.modal-body code {
+  background-color: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  color: #d63384;
+}
+
+.modal-body pre {
+  background-color: #f4f4f4;
+  padding: 12px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 10px 0;
+  border-left: 4px solid #667eea;
+}
+
+.modal-body pre code {
+  background: none;
+  padding: 0;
+  color: #333;
+}
+
+.modal-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+.modal-body table thead {
+  background-color: #667eea;
+  color: white;
+}
+
+.modal-body table th,
+.modal-body table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.modal-body table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.modal-body table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-body a {
+  color: #667eea;
+  text-decoration: none;
+  border-bottom: 1px solid #667eea;
+}
+
+.modal-body a:hover {
+  color: #5568d3;
+}
+
+.modal-body blockquote {
+  border-left: 4px solid #667eea;
+  padding-left: 15px;
+  margin: 10px 0;
+  color: #666;
+  font-style: italic;
+}
+
+.modal-select {
+  padding: 15px 20px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.modal-select label {
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-select select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.95em;
+  cursor: pointer;
+  background-color: white;
+}
+
+.modal-select select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
 }
