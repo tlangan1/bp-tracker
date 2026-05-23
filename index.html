@@ -54,7 +54,13 @@
             <input type="number" id="pulse" min="40" max="150" required />
           </div>
         </div>
-        <button id="addBtn" class="btn btn-primary">Add Reading</button>
+        <div class="entry-actions">
+          <button id="addBtn" class="btn btn-primary">Add Reading</button>
+          <button id="voiceBtn" class="btn btn-secondary" type="button">
+            Voice Entry
+          </button>
+          <span id="voiceStatus" class="voice-status" aria-live="polite"></span>
+        </div>
       </div>
 
       <div class="legend">

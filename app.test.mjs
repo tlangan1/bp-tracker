@@ -21,6 +21,8 @@ describe("BPTracker - Color Coding Logic", () => {
       <button id="clearAllBtn"></button>
       <button id="toggleViewBtn"></button>
       <button id="backToListBtn"></button>
+      <button id="voiceBtn"></button>
+      <span id="voiceStatus"></span>
       <input id="fileInput" type="file" />
       <tbody id="tableBody"></tbody>
       <tbody id="aggregatedTableBody"></tbody>
@@ -141,6 +143,33 @@ describe("BPTracker - Color Coding Logic", () => {
       expect(tracker.getTimePeriod("23:59")).toBe("2 PM - Midnight");
     });
   });
+
+  describe("extractReadingFromTranscript", () => {
+    it("should parse spoken BP and pulse pattern", () => {
+      const result = tracker.extractReadingFromTranscript(
+        "120 over 80 pulse 72",
+      );
+      expect(result).toEqual({ systolic: 120, diastolic: 80, pulse: 72 });
+    });
+
+    it("should parse fallback number sequence", () => {
+      const result = tracker.extractReadingFromTranscript(
+        "my reading is 118 76 69",
+      );
+      expect(result).toEqual({ systolic: 118, diastolic: 76, pulse: 69 });
+    });
+
+    it("should return partial values when only BP is captured", () => {
+      const result = tracker.extractReadingFromTranscript(
+        "blood pressure 130 over 85",
+      );
+      expect(result).toEqual({
+        systolic: 130,
+        diastolic: 85,
+        pulse: undefined,
+      });
+    });
+  });
 });
 
 describe("BPTracker - Data Management", () => {
@@ -162,6 +191,8 @@ describe("BPTracker - Data Management", () => {
       <button id="clearAllBtn"></button>
       <button id="toggleViewBtn"></button>
       <button id="backToListBtn"></button>
+      <button id="voiceBtn"></button>
+      <span id="voiceStatus"></span>
       <input id="fileInput" type="file" />
       <tbody id="tableBody"></tbody>
       <tbody id="aggregatedTableBody"></tbody>
@@ -212,7 +243,7 @@ describe("BPTracker - Data Management", () => {
 
       expect(tracker.readings.length).toBe(0);
       expect(alertSpy).toHaveBeenCalledWith(
-        "Please fill in all fields with valid numbers"
+        "Please fill in all fields with valid numbers",
       );
 
       alertSpy.mockRestore();

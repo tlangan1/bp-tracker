@@ -6,7 +6,11 @@ class BPTracker {
     this.readings = [];
     this.fileHandle = null; // Store reference to the file handle
     this.autoSaveEnabled = true;
+    this.recognition = null;
+    this.isListening = false;
+    this.voiceSupported = false;
     this.initializeEventListeners();
+    this.initializeVoiceEntry();
     this.setDefaultDate();
     this.loadLastFile(); // Try to load from last saved location
     this.renderTable();
@@ -41,6 +45,9 @@ class BPTracker {
     document
       .getElementById("backToListBtn")
       .addEventListener("click", () => this.showListView());
+    document
+      .getElementById("voiceBtn")
+      .addEventListener("click", () => this.toggleVoiceEntry());
 
     // Allow Enter key to submit form
     document
@@ -50,6 +57,154 @@ class BPTracker {
           if (e.key === "Enter") this.addReading();
         });
       });
+  }
+
+  initializeVoiceEntry() {
+    const voiceBtn = document.getElementById("voiceBtn");
+    const voiceStatus = document.getElementById("voiceStatus");
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!voiceBtn || !voiceStatus) {
+      return;
+    }
+
+    if (!SpeechRecognition) {
+      voiceBtn.disabled = true;
+      voiceBtn.title =
+        "Voice entry is not available in this browser. Try Chrome, Edge, or Safari.";
+      voiceStatus.textContent = "Voice entry unavailable in this browser";
+      return;
+    }
+
+    this.voiceSupported = true;
+    this.recognition = new SpeechRecognition();
+    this.recognition.lang = "en-US";
+    this.recognition.interimResults = false;
+    this.recognition.maxAlternatives = 1;
+
+    this.recognition.onstart = () => {
+      this.isListening = true;
+      voiceBtn.classList.add("listening");
+      voiceBtn.textContent = "Stop Voice Entry";
+      voiceStatus.textContent =
+        'Listening... Try "120 over 80 pulse 72" or "120 80 72"';
+    };
+
+    this.recognition.onend = () => {
+      this.isListening = false;
+      voiceBtn.classList.remove("listening");
+      voiceBtn.textContent = "Voice Entry";
+      if (
+        !voiceStatus.textContent ||
+        voiceStatus.textContent === "Listening..."
+      ) {
+        voiceStatus.textContent = "";
+      }
+    };
+
+    this.recognition.onerror = (event) => {
+      voiceStatus.textContent = `Voice error: ${event.error}`;
+    };
+
+    this.recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      const populated = this.applyVoiceTranscript(transcript);
+      if (populated) {
+        voiceStatus.textContent = `Captured: "${transcript}"`;
+      } else {
+        voiceStatus.textContent = `Could not find values in "${transcript}". Try saying three numbers.`;
+      }
+    };
+  }
+
+  toggleVoiceEntry() {
+    const voiceStatus = document.getElementById("voiceStatus");
+
+    if (!this.voiceSupported || !this.recognition) {
+      if (voiceStatus) {
+        voiceStatus.textContent =
+          "Voice entry is not available in this browser";
+      }
+      return;
+    }
+
+    try {
+      if (this.isListening) {
+        this.recognition.stop();
+      } else {
+        this.recognition.start();
+      }
+    } catch (error) {
+      if (voiceStatus) {
+        voiceStatus.textContent = `Unable to start voice input: ${error.message}`;
+      }
+    }
+  }
+
+  extractReadingFromTranscript(transcript) {
+    const normalized = transcript.toLowerCase();
+    const bpMatch = normalized.match(/(\d{2,3})\s*(?:over|\/|and)\s*(\d{2,3})/);
+    const pulseMatch = normalized.match(
+      /pulse\s*(?:is|of|at)?\s*(\d{2,3})|heart\s*rate\s*(?:is|of|at)?\s*(\d{2,3})/,
+    );
+
+    let systolic;
+    let diastolic;
+    let pulse;
+
+    if (bpMatch) {
+      systolic = parseInt(bpMatch[1], 10);
+      diastolic = parseInt(bpMatch[2], 10);
+    }
+
+    if (pulseMatch) {
+      pulse = parseInt(pulseMatch[1] || pulseMatch[2], 10);
+    }
+
+    const allNumbers =
+      normalized.match(/\d{2,3}/g)?.map((n) => parseInt(n, 10)) || [];
+
+    if (systolic === undefined && allNumbers.length >= 2) {
+      [systolic, diastolic] = allNumbers;
+    }
+
+    if (pulse === undefined && allNumbers.length >= 3) {
+      pulse = allNumbers[2];
+    }
+
+    return {
+      systolic,
+      diastolic,
+      pulse,
+    };
+  }
+
+  applyVoiceTranscript(transcript) {
+    const { systolic, diastolic, pulse } =
+      this.extractReadingFromTranscript(transcript);
+    let updated = false;
+
+    if (!Number.isNaN(systolic) && systolic !== undefined) {
+      document.getElementById("systolic").value = String(systolic);
+      updated = true;
+    }
+
+    if (!Number.isNaN(diastolic) && diastolic !== undefined) {
+      document.getElementById("diastolic").value = String(diastolic);
+      updated = true;
+    }
+
+    if (!Number.isNaN(pulse) && pulse !== undefined) {
+      document.getElementById("pulse").value = String(pulse);
+      updated = true;
+    }
+
+    if (updated) {
+      document.getElementById("addBtn").focus();
+    }
+
+    return updated;
   }
 
   setDefaultDate() {

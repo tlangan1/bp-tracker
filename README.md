@@ -5,8 +5,8 @@ A browser-based application for tracking blood pressure and pulse readings with 
 ## Features
 
 - **Easy Data Entry**: Record systolic, diastolic, and pulse readings for a given date and time
+- **Voice Data Entry**: Use your microphone to fill systolic/diastolic/pulse fields by speaking values
 - **Automatic Color Coding**: Visual indicators based on AHA guidelines
-
   - Green: Normal range
   - Yellow: Elevated
   - Orange: Stage 1 hypertension
@@ -14,7 +14,6 @@ A browser-based application for tracking blood pressure and pulse readings with 
   - Dark Red: Hypertensive crisis
 
 - **Data Management**:
-
   - Save/Load from browser's local storage
   - Export readings to text file
   - Import readings from text file
@@ -26,25 +25,22 @@ A browser-based application for tracking blood pressure and pulse readings with 
 ## How to Use
 
 1. **Open the Application**
-
    - Simply open `index.html` in any modern web browser
    - No server or installation required
 
 2. **Add a Reading**
-
    - Select the date and time of day
    - Enter systolic, diastolic, and pulse values
+   - Optional: Click "Voice Entry" and say something like "120 over 80 pulse 72"
    - Click "Add Reading"
    - The reading will appear in the table with color coding
 
 3. **Save Your Data**
-
    - Click "Save Data" to store in browser's local storage
    - Data persists between sessions
    - Click "Load Data" to restore saved data
 
 4. **Export/Import**
-
    - Export: Creates a text file with all readings
    - Import: Load readings from a previously exported text file
 
@@ -91,6 +87,8 @@ Works in all modern browsers:
 - Firefox
 - Safari
 - Opera
+
+Note: Voice entry depends on the browser's Web Speech API. It is most reliable in Chrome, Edge, and newer Safari versions.
 
 ## Data Storage
 
